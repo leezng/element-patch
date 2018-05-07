@@ -71,7 +71,7 @@ export default {
           }
         })())
 
-      childElements = childElements.filter(Boolean);
+      childElements = childElements.filter(Boolean)
 
       return h('el-' + elType, {
         props: props,
