@@ -54,6 +54,25 @@ export default {
       let elType = data.$type === 'checkbox-button' ? 'checkbox-group' : data.$type
       let props = Object.assign({}, obj, { value })
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
+      let childElements = []
+      const valid = ['append', 'prepend']
+
+      valid.forEach(e => {
+        if (obj[e]) {
+          childElements.push(h('span', { slot: e }, [obj[e]]))
+        }
+      })
+
+      childElements.push(
+        (() => {
+          let optRenderer = this[`${toCamelCase(data.$type)}_opt`]
+          if (typeof optRenderer === 'function' && Array.isArray(data.$options)) {
+            return data.$options.map(optRenderer)
+          }
+        })())
+
+      childElements = childElements.filter(Boolean)
+
       return h('el-' + elType, {
         props: props,
         on: {
@@ -62,14 +81,7 @@ export default {
             this.$emit('updateValue', { id: data.$id, value })
           }
         }
-      }, [
-        (() => {
-          let optRenderer = this[`${toCamelCase(data.$type)}_opt`]
-          if (typeof optRenderer === 'function' && Array.isArray(data.$options)) {
-            return data.$options.map(optRenderer)
-          }
-        })()
-      ])
+      }, childElements)
     }
   }
 }
