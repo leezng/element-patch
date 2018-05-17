@@ -15,7 +15,7 @@ yarn add el-form-renderer
 
 // Step3: In the .vue file that needs the renderer
 <template>
-  <el-form-renderer :content="content"></el-form-renderer>
+  <el-form-renderer :content="content" ref="formRender"></el-form-renderer>
 </template>
 
 <script>
@@ -78,6 +78,13 @@ export default {
 | ---------- | -------- | ---------- |
 | getFormValue | Get the value of the current form | - |
 | updateValue  | Update form value manually | ({ id, value }) |
+
+* `updateValue` Update the specific form-item value
+
+```js
+// id refers to $id
+this.$refs.formRender.updateValue({id: 'form1', value: 'updated value'})
+```
 
 ## Slot
 
