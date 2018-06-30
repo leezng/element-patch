@@ -78,7 +78,7 @@ export default {
         // not group
         defaultVal = item.$default
       }
-      defaultVal && this.updateValue({ id: item.$id, value: defaultVal })
+      (!!defaultVal || typeof defaultVal === 'boolean') && this.updateValue({ id: item.$id, value: defaultVal })
     },
     /**
      * 更新表单数据
