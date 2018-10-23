@@ -45,6 +45,7 @@ export default {
     })
   },
   props: Object.assign({}, Form.props, {
+    value:{type:Object,required:true},
     content: {
       type: Array,
       required: true
@@ -57,7 +58,7 @@ export default {
   }),
   data () {
     return {
-      value: {} // 表单数据对象
+      // value: {} // 表单数据对象
     }
   },
   methods: {
@@ -86,9 +87,10 @@ export default {
      * @param  {All} options.value 表单数据
      */
     updateValue ({ id, value }) {
-      this.value = Object.assign({}, this.value, {
+      const model = Object.assign({}, this.value, {
         [id]: value
       })
+      this.$emit("input",model)
     },
     // 对外提供获取表单数据的函数
     getFormValue () {

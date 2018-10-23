@@ -5,7 +5,9 @@ import { toCamelCase, isObject } from './utils'
 function validator (data) {
   if (!data) {
     throw new Error('item data must be an Object.')
-  } else if (!data.$id) {
+  } else if (data.render) {
+    return ;
+  }else if (!data.$id) {
     throw new Error('item $id is unvalidated.')
   } else if (!data.$type) {
     throw new Error('item $type is unvalidated.')
@@ -56,8 +58,19 @@ export default {
      * @param  {All} value 单项表单数据值
      */
     renderFormItemContent (h, data, value) {
+      if(data.render){
+        // 通过render渲染
+        return h({
+          render:data.render
+        })
+      }
       let obj = isObject(data.$el) ? data.$el : {}
       let elType = data.$type === 'checkbox-button' ? 'checkbox-group' : data.$type === 'radio-button' ? 'radio-group' : data.$type
+      if(elType === 'text'){
+        return h(
+          'div',value,
+        )
+      }
       let props = Object.assign({}, obj, { value })
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
       return h('el-' + elType, {
@@ -77,6 +90,6 @@ export default {
           }
         })()
       ])
-    }
+    },
   }
 }
