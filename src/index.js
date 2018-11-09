@@ -49,6 +49,11 @@ export default {
       type: Array,
       required: true
     },
+    value: {
+      type: Object,
+      required: true,
+      default () {}
+    },
     // 禁用所有表单
     disabled: {
       type: Boolean,
@@ -57,7 +62,7 @@ export default {
   }),
   data () {
     return {
-      value: {} // 表单数据对象
+      internalValue: {} // 表单数据对象
     }
   },
   methods: {
@@ -86,13 +91,15 @@ export default {
      * @param  {All} options.value 表单数据
      */
     updateValue ({ id, value }) {
-      this.value = Object.assign({}, this.value, {
+      const updatedValues = Object.assign({}, this.value, {
         [id]: value
       })
+      this.$emit('update', updatedValues)
+      this.internalValue = updatedValues
     },
     // 对外提供获取表单数据的函数
     getFormValue () {
-      return this.value
+      return this.internalValue
     }
   }
 }
