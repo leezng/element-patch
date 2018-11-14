@@ -92,7 +92,7 @@ export default {
     },
     // 对外提供获取表单数据的函数
     getFormValue () {
-      return this.value
+      return {...this.value}
     }
   }
 }
