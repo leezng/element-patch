@@ -24,7 +24,8 @@ export default {
     },
     itemValue: {},
     value: Object,
-    disabled: Boolean
+    disabled: Boolean,
+    renderItem: Function
   },
   computed: {
     // 是否显示
@@ -60,7 +61,7 @@ export default {
       let elType = data.$type === 'checkbox-button' ? 'checkbox-group' : data.$type === 'radio-button' ? 'radio-group' : data.$type
       let props = Object.assign({}, obj, { value })
       this.disabled && (props.disabled = this.disabled) // 只能全局禁用, false时不处理
-      return h('el-' + elType, {
+      return this.renderItem && this.renderItem(h, data, value) || h('el-' + elType, {
         attrs: props, // 用于支持placeholder等原生属性(同时造成dom上挂载一些props)
         props,
         on: {

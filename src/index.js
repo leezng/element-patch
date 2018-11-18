@@ -20,7 +20,8 @@ export default {
               data: item,
               value: this.value,
               itemValue: this.value[item.$id],
-              disabled: this.disabled
+              disabled: this.disabled,
+              renderItem: this.renderItem
             },
             on: {
               updateValue: this.updateValue
@@ -53,7 +54,8 @@ export default {
     disabled: {
       type: Boolean,
       default: false
-    }
+    },
+    renderItem: Function
   }),
   data () {
     return {
