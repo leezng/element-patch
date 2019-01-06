@@ -1,0 +1,27 @@
+.elx-tag-select {
+  position: relative;
+  .elx-tag-select-item {
+    display: inline-block;
+    padding: 0 10px;
+    margin-right: 10px;
+    height: 22px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #606266;
+    background-color: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 1px solid rgba(64, 158, 255, .2);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  .elx-tag-select-item:not(.elx-tag-select-checked):hover {
+    color: #409eff;
+  }
+  .elx-tag-select-checked {
+    color: #fff;
+    background-color: #409eff;
+    border-color: #409eff;
+  }
+}

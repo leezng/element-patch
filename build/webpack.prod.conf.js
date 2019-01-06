@@ -52,15 +52,26 @@ var webpackConfig = merge(baseWebpackConfig, {
 
 if (isDist) {
   webpackConfig.entry = {
-    'el-form-renderer': './src/index.js'
+    'element-patch': './src/index.js'
   }
   webpackConfig.output = {
     filename: `${distPath}/[name].js`,
-    library: 'ElFormRenderer',
+    library: 'ElementPatch',
     libraryTarget: 'umd'
   }
   webpackConfig.externals = [nodeExternals()]
   webpackConfig.plugins.push(
+     // extract css into its own file
+    new ExtractTextPlugin({
+      filename: `${distPath}/index.css`
+    }),
+    // Compress extracted CSS. We are using this plugin so that possible
+    // duplicated CSS from different components can be deduped.
+    new OptimizeCSSPlugin({
+      cssProcessorOptions: {
+        safe: true
+      }
+    }),
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../package.json'),
@@ -70,12 +81,9 @@ if (isDist) {
   )
 } else {
   webpackConfig.plugins.push(
-    // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css')
     }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({
       cssProcessorOptions: {
         safe: true
