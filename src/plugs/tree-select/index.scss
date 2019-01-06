@@ -1,0 +1,39 @@
+.elx-tree-select {
+  .input-wrapper {
+    position: relative;
+    &:hover,
+    &:focus {
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
+    &:hover input {
+      border-color: #c0c4cc;
+    }
+    &:focus input {
+      border-color: #409eff;
+    }
+    .drop-icon {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .el-tag {
+      margin: 2px 0 2px 6px;
+    }
+    .multi-result {
+      position: absolute;
+      left: 0;
+      right: 25px;
+      line-height: normal;
+      white-space: normal;
+      z-index: 1;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+}
