@@ -20,7 +20,6 @@ import ElementPatch from 'element-patch'
 import 'element-patch/index.css'
 
 Vue.use(ElementPatch)
-</script>
 ```
 
 ## Features
