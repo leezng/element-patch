@@ -3,4 +3,10 @@
   .el-pagination {
     margin-top: 15px;
   }
+  .el-table__body tr.before-dom > td {
+    border-top: 2px dashed #409EFF;
+  }
+  .el-table__body tr.after-dom > td {
+    border-bottom: 2px dashed #409EFF;
+  }
 }

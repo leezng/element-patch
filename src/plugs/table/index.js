@@ -1,4 +1,5 @@
 import Table from 'element-ui/lib/table'
+import { addClass, removeClass } from 'src/utils/dom'
 import './index.scss'
 
 function ElxTable (WrappedComponent) {
@@ -62,6 +63,7 @@ function ElxTable (WrappedComponent) {
         this.tbody.removeEventListener('dragstart', this.onDragStart)
         this.tbody.removeEventListener('dragenter', this.onDragEnter)
         this.tbody.removeEventListener('dragover', this.onDragOver)
+        this.tbody.removeEventListener('dragleave', this.onDragLeave)
         this.tbody.removeEventListener('drop', this.onDrop)
       }
     },
@@ -106,6 +108,7 @@ function ElxTable (WrappedComponent) {
         this.tbody.addEventListener('dragstart', this.onDragStart)
         this.tbody.addEventListener('dragenter', this.onDragEnter)
         this.tbody.addEventListener('dragover', this.onDragOver)
+        this.tbody.addEventListener('dragleave', this.onDragLeave)
         this.tbody.addEventListener('drop', this.onDrop)
       },
       onDragStart (e) {
@@ -113,18 +116,44 @@ function ElxTable (WrappedComponent) {
       },
       onDragEnter (e) {
         e.preventDefault()
+        let el = e.target
+        while (!el.draggable) {
+          el = el.parentNode
+          if (el === this.tbody) return
+        }
+        if (el === this._currentTr) return
+
+        // 缓存当前tr
+        this._currentTr = el
+        const targetIndex = this.trList.indexOf(el)
+        if (this.dragInfo.start < targetIndex) {
+          addClass(el, 'after-dom')
+        } else if (this.dragInfo.start > targetIndex) {
+          addClass(el, 'before-dom')
+        }
       },
       onDragOver (e) {
         e.preventDefault()
       },
+      onDragLeave (e) {
+        let el = e.target
+        while (!el.draggable) {
+          el = el.parentNode
+          if (el === this.tbody) return
+        }
+        if (el === this._currentTr) return
+
+        removeClass(el, 'before-dom after-dom')
+      },
       onDrop (e) {
         e.preventDefault()
-        let el = e.target
+        let el = this._currentTr || e.target
         while (el.tagName !== 'TR') {
           el = el.parentNode
           if (el === this.tbody) return
         }
 
+        removeClass(el, 'before-dom after-dom')
         this.dragInfo.end = this.trList.indexOf(el)
         const { start, end } = this.dragInfo
         this.tableData.splice(end, 0, ...this.tableData.splice(start, 1))
