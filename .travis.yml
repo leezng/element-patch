@@ -35,4 +35,4 @@ jobs:
 
 env:
   global:
-    - GH_REF: github.com/leezng/el-form-renderer.git
+    - GH_REF: github.com/leezng/element-patch.git
