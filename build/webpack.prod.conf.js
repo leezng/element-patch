@@ -8,7 +8,9 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var nodeExternals = require('webpack-node-externals');
+var CleanWebpackPlugin = require('clean-webpack-plugin')
+var nodeExternals = require('webpack-node-externals')
+var components = require('./components')
 
 var isDist = !!process.env.DIST_ENV
 var distPath = './dist'
@@ -31,16 +33,22 @@ var webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
-    // http://vuejs.github.io/vue-loader/en/workflow/production.html
+    // clean
+    new CleanWebpackPlugin(distPath, {
+      root: process.cwd()
+    }),
+    // define variables
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    // uglify
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       },
       sourceMap: config.build.productionSourceMap
     }),
+    // copy
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../README.md'),
@@ -51,11 +59,13 @@ var webpackConfig = merge(baseWebpackConfig, {
 })
 
 if (isDist) {
+  // package
   webpackConfig.entry = {
-    'element-patch': './src/index.js'
+    'element-patch': './src/index.js',
+    ...components
   }
   webpackConfig.output = {
-    filename: `${distPath}/[name].js`,
+    filename: `${distPath}/lib/[name].js`,
     library: 'ElementPatch',
     libraryTarget: 'umd'
   }
@@ -76,10 +86,14 @@ if (isDist) {
       {
         from: path.resolve(__dirname, '../package.json'),
         to: distPath
+      }, {
+        from: path.resolve(__dirname, '../LICENSE'),
+        to: distPath
       }
     ])
   )
 } else {
+  // example pages
   webpackConfig.plugins.push(
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css')
