@@ -14,7 +14,7 @@ install:
 stages:
   - lint
   - name: gh_pages
-    if: branch = master
+    if: branch = dev
 
 jobs:
   include:
@@ -23,15 +23,15 @@ jobs:
     - stage: gh_pages
       script: npm run build
       after_script:
-        - cd ./example-dist
-        - git init
-        - git remote add origin "https://${GH_TOKEN}@${GH_REF}"
-        - git checkout -b gh-pages
+        - git clone -b gh-pages "https://${GH_TOKEN}@${GH_REF}" gh-pages
+        - rm -r gh-pages/*
+        - cp -r example-dist/. gh-pages
+        - cd ./gh-pages
         - git config user.name "leezng"
         - git config user.email "im.leezng@gmail.com"
         - git add .
-        - git commit -m "update example page"
-        - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
+        - git commit -m "update gh-pages"
+        - git push --quiet "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
 
 env:
   global:
