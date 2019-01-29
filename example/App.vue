@@ -1,15 +1,15 @@
 <template>
   <el-container class="container">
     <el-header>
-      <h1>Element Patch</h1>
+      <h1 style="font-family: fantasy; color: #409EFF;">Element Patch</h1>
     </el-header>
 
     <el-container>
-      <el-aside width="200px" ref="aside" :style="asideStyle">
+      <el-aside width="240px" ref="aside" :style="asideStyle">
         <elx-menu-renderer
           :router="true"
-          :default-openeds="['2']"
-          default-active="1"
+          :default-openeds="['3']"
+          :default-active="currentAcitve"
           :content="menuData">
         </elx-menu-renderer>
       </el-aside>
@@ -25,6 +25,7 @@
   export default {
     data () {
       return {
+        currentAcitve: '1',
         asideStyle: {
           position: 'absolute'
         },
@@ -32,26 +33,29 @@
           label: '开始',
           route: {path: '/start'}
         }, {
+          label: '更新日志',
+          route: {path: '/changelog'}
+        }, {
           label: 'Components',
           subMenu: [{
             title: '元组件',
             content: [{
-              label: '标签选择器',
+              label: 'TagSelect 标签选择器',
               route: {path: '/tag-select'}
             }]
           }, {
             title: '复合组件',
             content: [{
-              label: '菜单渲染器',
+              label: 'MenuRenderer 菜单渲染器',
               route: {path: '/menu-renderer'}
             }, {
-              label: '表单渲染器',
+              label: 'FormRenderer 表单渲染器',
               route: {path: '/form-renderer'}
             }, {
-              label: '表格',
+              label: 'Table 表格',
               route: {path: '/table'}
             }, {
-              label: '树选择',
+              label: 'TreeSelect 树选择',
               route: {path: '/tree-select'}
             }]
           }]
@@ -69,6 +73,11 @@
           }
       }
     },
+    watch: {
+      '$route.path' (val) {
+        // this.currentAcitve = '2'
+      }
+    },
     created () {
       window.addEventListener('scroll', this.onScroll)
     },
@@ -80,11 +89,11 @@
 
 <style scoped>
   .container {
-    width: 1140px;
+    width: 1190px;
     padding: 0;
     margin: 0 auto;
   }
   .el-main {
-    margin-left: 200px;
+    margin-left: 240px;
   }
 </style>

@@ -14,7 +14,7 @@ install:
 stages:
   - lint
   - name: gh_pages
-    if: branch = dev
+    if: branch = master
 
 jobs:
   include:
