@@ -43,7 +43,7 @@
       padding: 15px;
     }
     .title > *:first-child {
-      font-weight: 500;
+      font-weight: bold;
     }
     .source {
       border-bottom: 1px solid #e9e9e9;

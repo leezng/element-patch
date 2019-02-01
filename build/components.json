@@ -1,0 +1,7 @@
+{
+  "tag-select": "./src/components/tag-select/index.vue",
+  "form-renderer": "./src/plugs/form-renderer/index.js",
+  "menu-renderer": "./src/plugs/menu-renderer/index.js",
+  "table": "./src/plugs/table/index.js",
+  "tree-select": "./src/plugs/tree-select/index.vue"
+}
