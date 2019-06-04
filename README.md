@@ -2,7 +2,7 @@
 
 An [element-ui](https://github.com/ElemeFE/element) based extension package. We extend some components, such as Table, Menu, Form, etc., to enrich their features and functions, such as dynamically rendered forms and menus, draggable tables, and more. At the same time, we have added some common components and scenarios, such as tree selectors, to provide a fast solution.
 
-From `el-form-renderer` to `element-patch`, `el-form-renderer` has become a historically independent [branch](https://github.com/leezng/element-patch/tree/el-form-renderer) that will no longer be maintained separately, and subsequent `element-patch` will provide an on-demand installation.
+From `el-form-renderer` to `element-patch`, `el-form-renderer` has become a historically independent [branch](https://github.com/leezng/element-patch/tree/el-form-renderer) that will no longer be maintained separately. You can click here to see [how to migration from el-form-renderer](https://leezng.github.io/element-patch/).
 
 ## Links
 
