@@ -2,7 +2,7 @@
 
 基于 [element-ui](https://github.com/ElemeFE/element) 的扩展包。我们对一些组件，例如 Table, Menu, Form 等进行扩展，丰富其特性与功能，例如动态渲染的表单与菜单，可拖拽的表格等。同时增加了一些常用组件与场景，例如树型选择器等，致力于提供一套快速的解决方案。
 
-从 `el-form-renderer` 升级到 `element-patch`，`el-form-renderer` 已成为一个历史[独立分支](https://github.com/leezng/element-patch/tree/el-form-renderer)，将不再进行单独维护，后续 `element-patch` 将提供按需加载方式。
+从 `el-form-renderer` 升级到 `element-patch`，`el-form-renderer` 已成为一个历史[独立分支](https://github.com/leezng/element-patch/tree/el-form-renderer)，将不再进行单独维护。[点击这里查看如何从 el-form-renderer 迁移](https://leezng.github.io/element-patch/)。
 
 ## Links
 

@@ -104,6 +104,12 @@
     methods: {
       // 在data中找到当前项
       getCurrentItem (data, value) {
+        if (!value) {
+          return {
+            label: '',
+            value: ''
+          }
+        }
         let arr = [...data]
         while (arr.length) {
           const item = arr.shift()

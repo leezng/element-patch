@@ -1,6 +1,6 @@
 {
   "name": "element-patch",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Vue.js project",
   "author": "leezng <im.leezng@gmail.com>",
   "main": "lib/element-patch.js",
