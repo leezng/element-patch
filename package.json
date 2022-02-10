@@ -67,7 +67,7 @@
     "http-proxy-middleware": "^0.17.3",
     "markdown-it-container": "^2.0.0",
     "nightwatch": "^0.9.12",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "opn": "^5.1.0",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
     "ora": "^1.2.0",
